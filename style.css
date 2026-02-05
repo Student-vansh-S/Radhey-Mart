@@ -1,0 +1,197 @@
+:root{
+  --bg: #0f1115;
+  --bg-2: #141823;
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.14);
+  --text: #f5f7fb;
+  --muted: rgba(245,247,251,0.72);
+  --accent: #ffffff;
+  --shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+body.light{
+  --bg: #f4f5f7;
+  --bg-2: #ffffff;
+  --card: #ffffff;
+  --border: rgba(17,17,17,0.12);
+  --text: #121418;
+  --muted: rgba(18,20,24,0.70);
+  --accent: #121418;
+  --shadow: 0 12px 30px rgba(0,0,0,0.10);
+}
+
+body{
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(255,255,255,0.06), transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(255,255,255,0.04), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar{
+  background: rgba(0,0,0,0.35);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+body.light .navbar{ background: rgba(255,255,255,0.75); }
+
+.navbar-brand{ color: var(--text) !important; }
+.krishna-icon{
+  font-size: 1.1rem;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.nav-link{ color: var(--muted) !important; }
+.nav-link:hover{ color: var(--text) !important; }
+
+/* Buttons */
+.btn-mono{
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease;
+}
+.btn-mono:hover{
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-1px);
+}
+body.light .btn-mono:hover{ background: rgba(0,0,0,0.06); }
+
+.btn-solid{
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+  transition: transform .12s ease, filter .2s ease;
+}
+.btn-solid:hover{
+  filter: brightness(0.92);
+  transform: translateY(-1px);
+}
+
+.cart-badge{
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+}
+
+/* Hero */
+.hero{ padding: 90px 0 60px; }
+.hero-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 20px;
+  overflow: hidden;
+}
+body.light .hero-card{ background: var(--card); }
+
+.hero-badge{
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 8px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.muted{ color: var(--muted); }
+
+.showcase{
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.18);
+}
+
+/* Sections */
+.section{ padding: 70px 0; }
+.section-title{ letter-spacing: -0.5px; }
+.anchor-offset{ scroll-margin-top: 90px; }
+
+.products{
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-select{ max-width: 220px; }
+
+/* Cards */
+.mono-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: transform .15s ease;
+  height: 100%;
+}
+body.light .mono-card{ box-shadow: 0 10px 24px rgba(0,0,0,0.07); }
+.mono-card:hover{ transform: translateY(-2px); }
+
+.price{ font-weight: 700; letter-spacing: -0.3px; }
+
+.chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Form */
+.form-control, .form-select{
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.form-control:focus, .form-select:focus{
+  box-shadow: none;
+  border-color: rgba(255,255,255,0.35);
+}
+body.light .form-control, body.light .form-select{
+  background: #fff;
+  color: var(--text);
+}
+
+.error-text{
+  font-size: 0.85rem;
+  color: #ffb4b4;
+  margin-top: 6px;
+  display: none;
+}
+body.light .error-text{ color: #b00020; }
+
+.success-text{ display: none; }
+
+.mono-toast{
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.toast-close{ filter: invert(1); }
+body.light .toast-close{ filter: invert(0); }
+
+/* Footer */
+footer{
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  color: var(--muted);
+}
+
+.form-select,.form-select option {
+  background-color: #0f1115;   /* dark background */
+  color: #ffffff;              /* white text */
+}
+
+/* Light theme override */
+body.light .form-select,
+body.light .form-select option {
+  background-color: #ffffff;
+  color: #121418;
+}
