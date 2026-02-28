@@ -1,9 +1,8 @@
-import { useCart } from "../context/CartContext";
-import { Spinner } from "../components/Skeleton";
-import { Link } from "react-router-dom";
-import api from "../api/axios";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useCart } from '../context/CartContext';
+import { Spinner } from '../components/Skeleton';
+import { Link, useNavigate } from 'react-router-dom';
+import api from '../api/axios';
+import toast from 'react-hot-toast';
 
 export default function CartPage() {
   const { cart, cartLoading, updateItem, removeItem, emptyCart, loadCart } = useCart();
@@ -11,12 +10,15 @@ export default function CartPage() {
 
   const handleCheckout = async () => {
     try {
-      const res = await api.post("/orders/checkout");
-      toast.success("Order confirmed!");
-      await loadCart(); // clear UI after backend clears cart
+      const res = await api.post('/orders/checkout'); // baseURL already has /api
+      toast.success('Order confirmed!');
+      await loadCart(); // refresh UI after backend clears cart
       navigate(`/order-success/${res.data.data.orderId}`);
     } catch (e) {
-      toast.error(e.response?.data?.message || "Checkout failed");
+      const status = e.response?.status;
+      if (status === 400) return toast.error(e.response?.data?.message || 'Cart is empty');
+      if (status === 401) return toast.error('Please login again');
+      toast.error(e.response?.data?.message || 'Checkout failed');
     }
   };
 
@@ -76,7 +78,7 @@ export default function CartPage() {
                     {item.name}
                   </h3>
                   <p className="text-white font-bold mt-1">
-                    ₹{parseFloat(item.price).toLocaleString("en-IN")}
+                    ₹{parseFloat(item.price).toLocaleString('en-IN')}
                   </p>
                 </div>
                 <div className="flex flex-col items-end justify-between flex-shrink-0">
@@ -108,7 +110,7 @@ export default function CartPage() {
                     </button>
                   </div>
                   <p className="text-sm font-semibold text-white">
-                    ₹{parseFloat(item.item_total).toLocaleString("en-IN")}
+                    ₹{parseFloat(item.item_total).toLocaleString('en-IN')}
                   </p>
                 </div>
               </div>
@@ -122,7 +124,7 @@ export default function CartPage() {
               <div className="flex justify-between text-brand-muted">
                 <span>Items ({cart.totalItems})</span>
                 <span className="text-white">
-                  ₹{parseFloat(cart.totalAmount).toLocaleString("en-IN")}
+                  ₹{parseFloat(cart.totalAmount).toLocaleString('en-IN')}
                 </span>
               </div>
               <div className="flex justify-between text-brand-muted">
@@ -133,16 +135,13 @@ export default function CartPage() {
             <div className="border-t border-brand-border my-4" />
             <div className="flex justify-between font-bold text-white mb-5">
               <span>Total</span>
-              <span>
-                ₹{parseFloat(cart.totalAmount).toLocaleString("en-IN")}
-              </span>
+              <span>₹{parseFloat(cart.totalAmount).toLocaleString('en-IN')}</span>
             </div>
-            <button
-              className="btn-primary w-full py-3"
-              onClick={handleCheckout}
-            >
+
+            <button className="btn-primary w-full py-3" onClick={handleCheckout}>
               Proceed to Checkout
             </button>
+
             <Link
               to="/"
               className="block text-center text-brand-muted hover:text-white text-sm mt-3 transition-colors"

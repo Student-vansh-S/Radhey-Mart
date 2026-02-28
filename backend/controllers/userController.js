@@ -36,7 +36,7 @@ const register = async (req, res, next) => {
 
     const password_hash = await bcrypt.hash(password, SALT_ROUNDS);
 
-    // ✅ IMPORTANT: store role
+    // IMPORTANT: store role
     const result = await pool.query(
       `INSERT INTO users (name, email, password_hash, role)
        VALUES ($1, $2, $3, $4)
@@ -46,7 +46,7 @@ const register = async (req, res, next) => {
 
     const user = result.rows[0];
 
-    // ✅ IMPORTANT: include role in JWT
+    // IMPORTANT: include role in JWT
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
@@ -77,7 +77,7 @@ const login = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password_hash);
     if (!match) return sendError(res, "Invalid credentials", 401);
 
-    // ✅ IMPORTANT: include role in JWT
+    // IMPORTANT: include role in JWT
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_SECRET,

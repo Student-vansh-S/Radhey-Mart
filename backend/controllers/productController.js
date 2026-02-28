@@ -1,7 +1,7 @@
 const pool = require("../db/pool");
 const { sendSuccess, sendError } = require("../utils/response");
 
-// ✅ Admin creates product, product belongs to that admin (created_by)
+// Admin creates product, product belongs to that admin (created_by)
 const createProduct = async (req, res, next) => {
   try {
     const { name, price, category, image_url, description } = req.body;
@@ -22,7 +22,7 @@ const createProduct = async (req, res, next) => {
         category.trim(),
         image_url || null,
         description || null,
-        req.user.id, // ✅ owner
+        req.user.id, // owner
       ],
     );
 
@@ -104,7 +104,7 @@ const getProductById = async (req, res, next) => {
   }
 };
 
-// ✅ Admin can update ONLY their own product
+// Admin can update ONLY their own product
 const updateProduct = async (req, res, next) => {
   try {
     if (!req.user?.id) return sendError(res, "Unauthorized", 401);
@@ -125,7 +125,7 @@ const updateProduct = async (req, res, next) => {
         image_url || null,
         description || null,
         req.params.id,
-        req.user.id, // ✅ owner check
+        req.user.id, // owner check
       ],
     );
 
@@ -160,7 +160,7 @@ const getMyProducts = async (req, res, next) => {
   }
 };
 
-// ✅ Admin can delete ONLY their own product
+// Admin can delete ONLY their own product
 const deleteProduct = async (req, res, next) => {
   try {
     if (!req.user?.id) return sendError(res, "Unauthorized", 401);

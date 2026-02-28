@@ -15,7 +15,7 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path;
 
-  // ✅ Admin check
+  //Admin check
   const isAdmin = user?.role === "admin";
 
   return (
@@ -40,7 +40,7 @@ export default function Navbar() {
               Home
             </Link>
 
-            {/* ✅ Show Admin only for admin users */}
+            {/* Show Admin only for admin users */}
             {isAdmin && (
               <Link
                 to="/admin"

@@ -13,8 +13,8 @@ export default function Register() {
     email: "",
     password: "",
     confirm: "",
-    role: "user",        // ✅ new
-    adminSecret: "",     // ✅ new
+    role: "user",        
+    adminSecret: "",     
   });
 
   const [errors, setErrors] = useState({});
@@ -33,7 +33,7 @@ export default function Register() {
 
     if (form.password !== form.confirm) e.confirm = "Passwords do not match";
 
-    // ✅ only required when registering as admin
+    // only required when registering as admin
     if (isAdmin && !form.adminSecret.trim()) e.adminSecret = "Admin secret is required";
 
     return e;
@@ -54,8 +54,8 @@ export default function Register() {
         name: form.name,
         email: form.email,
         password: form.password,
-        role: form.role, // ✅ send role
-        ...(isAdmin ? { adminSecret: form.adminSecret } : {}), // ✅ send adminSecret only if admin
+        role: form.role, // send role
+        ...(isAdmin ? { adminSecret: form.adminSecret } : {}), // send adminSecret only if admin
       };
 
       const res = await registerUser(payload);
@@ -88,7 +88,7 @@ export default function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
-          {/* ✅ Role selector */}
+          {/* Role selector */}
           <div>
             <label className="label">Register as</label>
             <select
@@ -102,7 +102,7 @@ export default function Register() {
             {errors.role && <p className="text-red-400 text-xs mt-1">{errors.role}</p>}
           </div>
 
-          {/* ✅ Admin secret (only if admin) */}
+          {/* Admin secret (only if admin) */}
           {isAdmin && (
             <div>
               <label className="label">Admin Secret</label>
